@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base theme variables */
+:root {
+  --background-start: 255, 255, 255;
+  --background-end: 249, 250, 251;
+  --foreground: 15, 23, 42;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-duration: 150ms;
+}
+
+/* Dark theme variables */
+.dark {
+  --background-start: 15, 23, 42;
+  --background-end: 17, 24, 39;
+  --foreground: 248, 250, 252;
+}
+
+/* Base styles */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: rgb(var(--foreground));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start)),
+    rgb(var(--background-end))
+  );
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', system-ui, sans-serif;
+  margin: 0;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Custom utility classes */
+@layer components {
+  .button-base {
+    @apply rounded-lg px-4 py-2 transition-colors duration-200;
+  }
+
+  .button-primary {
+    @apply button-base bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+  }
+  
+  .button-secondary {
+    @apply button-base bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700;
+  }
+
+  .input-base {
+    @apply block w-full px-3 py-2 bg-white dark:bg-gray-800 
+           border border-gray-200 dark:border-gray-700 
+           rounded-lg focus:ring-2 focus:ring-indigo-500 
+           focus:border-transparent transition-colors duration-200
+           outline-none;
+  }
+}
+
+/* Transitions */
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: var(--transition-timing);
+  transition-duration: var(--transition-duration);
+}
+
+/* Ensure dark mode transitions are smooth */
+* {
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              border-color var(--transition-duration) var(--transition-timing);
+}
